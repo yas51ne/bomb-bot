@@ -174,19 +174,12 @@ class Login:
             for i in range(login_attepmts):
                 
                 if BombScreen.get_current_screen() != BombScreenEnum.LOGIN.value:
+                    click_when_target_appears("button_accept_terms_1")
+                    click_when_target_appears("button_accept_terms_2")
                     refresh_page()
                     BombScreen.wait_for_screen(BombScreenEnum.LOGIN.value)
 
                 logger_translated("Login", LoggerEnum.PAGE_FOUND)
-
-                logger_translated("terms and services", LoggerEnum.BUTTON_CLICK)
-                if not click_when_target_appears("button_accept_terms_1"):
-                    refresh_page()
-                    continue
-
-                if not click_when_target_appears("button_accept_terms_2"):
-                    refresh_page()
-                    continue
 
                 logger_translated("wallet", LoggerEnum.BUTTON_CLICK)
                 if not click_when_target_appears("button_connect_wallet"):

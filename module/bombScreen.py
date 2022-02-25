@@ -7,6 +7,7 @@ from .config import Config
 from .image import Image
 from .logger import LoggerEnum, logger, logger_translated
 from .mouse import *
+from .keyboard import *
 from .utils import *
 from .telegram import TelegramBot
 

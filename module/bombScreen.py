@@ -187,27 +187,27 @@ class Login:
                     refresh_page()
                     continue
 
-                if Config.get("login", "use_metamask"):
-                    logger_translated("connect with metamask", LoggerEnum.BUTTON_CLICK)
-                    if not click_when_target_appears("button_connect_metamask"):
-                        refresh_page()
-                        continue
-                    logger_translated("sigin wallet", LoggerEnum.BUTTON_CLICK)
-                    if not click_when_target_appears("button_connect_wallet_sign"):
-                        refresh_page()
-                        continue
-                else:
-                    logger_translated("filling username", LoggerEnum.BUTTON_CLICK)
-                    if not click_and_fill_when_target_appears("username", "toto"):
-                        refresh_page()
-                        continue
-                    logger_translated("filling password", LoggerEnum.BUTTON_CLICK)
-                    if not click_and_fill_when_target_appears("password", "tata"):
-                        refresh_page()
-                        continue
-                    if not click_when_target_appears("button_login"):
-                        refresh_page()
-                        continue
+#                if Config.get("login", "use_metamask"):
+#                    logger_translated("connect with metamask", LoggerEnum.BUTTON_CLICK)
+#                    if not click_when_target_appears("button_connect_metamask"):
+#                        refresh_page()
+#                        continue
+#                    logger_translated("sigin wallet", LoggerEnum.BUTTON_CLICK)
+#                    if not click_when_target_appears("button_connect_wallet_sign"):
+#                        refresh_page()
+#                        continue
+#                else:
+                logger_translated("filling username", LoggerEnum.BUTTON_CLICK)
+                if not click_and_fill_when_target_appears("username", "toto"):
+                    refresh_page()
+                    continue
+                logger_translated("filling password", LoggerEnum.BUTTON_CLICK)
+                if not click_and_fill_when_target_appears("password", "tata"):
+                    refresh_page()
+                    continue
+                if not click_when_target_appears("button_login"):
+                    refresh_page()
+                    continue
 
                 if (BombScreen.wait_for_screen(BombScreenEnum.HOME.value) != BombScreenEnum.HOME.value):
                     logger("🚫 Failed to login, restart proccess...")

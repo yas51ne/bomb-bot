@@ -8,6 +8,15 @@ from .logger import logger
 from .utils import *
 
 
+def randomize_values(x, w, y, h):
+    x_rand = randomize_int(x, w, 0.20)
+    y_rand = randomize_int(y, h, 0.20)
+    move_duration = randomize(0.1, 0.5)
+    click_duration = randomize(0.05, 0.2)
+    time_between = randomize(0.05, 0.3)
+
+    return x_rand, y_rand, move_duration, click_duration, time_between
+
 def click_and_fill_one_target(target: str, input_text: str):
     """click in a target. Returns number of clicks"""
     result = None

@@ -149,7 +149,7 @@ class BombScreen:
             else:
                 image = Image.print_partial_screen("chest", "chest_screen_for_geometry")
         
-            TelegramBot.send_message_with_image(image, "Se liga no BCOIN desse baú, não deixe de contribuir com a evolução do bot :D")
+            TelegramBot.send_message_with_image(image, "here is a status of your account :D")
         except Exception as e:
             logger(str(e))
             logger("😬 Ohh no! We couldn't send your farm report to Telegram.", color="yellow", force_log_file=True)
@@ -186,29 +186,28 @@ class Login:
                 if not click_when_target_appears("button_connect_wallet"):
                     refresh_page()
                     continue
-                
-#                logger_translated("connect with metamask", LoggerEnum.BUTTON_CLICK)
-#                if not click_when_target_appears("button_connect_metamask"):
-#                    refresh_page()
-#                    continue
 
-                logger_translated("connect with login/password", LoggerEnum.BUTTON_CLICK)
-
-                if not click_and_fill_when_target_appears("username", "toto"):
-                    refresh_page()
-                    continue
-                if not click_and_fill_when_target_appears("password", "tata"):
-                    refresh_page()
-                    continue
-
-                if not click_when_target_appears("button_login"):
-                    refresh_page()
-                    continue
-
-                logger_translated("sigin wallet", LoggerEnum.BUTTON_CLICK)
-                if not click_when_target_appears("button_connect_wallet_sign"):
-                    refresh_page()
-                    continue
+                if Config.get("login", "use_metamask"):
+                    logger_translated("connect with metamask", LoggerEnum.BUTTON_CLICK)
+                    if not click_when_target_appears("button_connect_metamask"):
+                        refresh_page()
+                        continue
+                    logger_translated("sigin wallet", LoggerEnum.BUTTON_CLICK)
+                    if not click_when_target_appears("button_connect_wallet_sign"):
+                        refresh_page()
+                        continue
+                else:
+                    logger_translated("filling username", LoggerEnum.BUTTON_CLICK)
+                    if not click_and_fill_when_target_appears("username", "toto"):
+                        refresh_page()
+                        continue
+                    logger_translated("filling password", LoggerEnum.BUTTON_CLICK)
+                    if not click_and_fill_when_target_appears("password", "tata"):
+                        refresh_page()
+                        continue
+                    if not click_when_target_appears("button_login"):
+                        refresh_page()
+                        continue
 
                 if (BombScreen.wait_for_screen(BombScreenEnum.HOME.value) != BombScreenEnum.HOME.value):
                     logger("🚫 Failed to login, restart proccess...")
